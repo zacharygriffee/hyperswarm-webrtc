@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "hyperswarm-webrtc": "../dist/index.min.js"
+            }
+        }
+    </script>
+</head>
+<body>
+    <script type="module">
+        import * as SwarmWebRTC from "hyperswarm-webrtc";
+
+        const topic = SwarmWebRTC.createTopic("fun debug non cool weird topic");
+        const swarm1 = SwarmWebRTC.connect("wss://ahgg-dht.us-3.evennode.com");
+        const swarm2 = SwarmWebRTC.connect("wss://ahgg-dht.us-3.evennode.com");
+        swarm1.on("connection", peer => {
+            console.log(peer, "connected")
+        });
+        swarm2.on("connection", peer => {
+            console.log(peer, "connected");
+        });
+        swarm1.join(topic);
+        swarm2.join(topic);
+    </script>
+</body>
+</html>
